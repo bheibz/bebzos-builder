@@ -5,8 +5,7 @@ echo "🔧 Membuat folder kerja BebzOS..."
 mkdir -p build
 cd build
 
-echo "📦 Install live-build..."
-sudo apt update && sudo apt install -y live-build debootstrap
+
 
 echo "⚙️ Setup konfigurasi dasar Debian XFCE..."
 lb config \
@@ -19,7 +18,11 @@ lb config \
   --mirror-binary http://deb.debian.org/debian/
 
 echo "📁 Menyalin konfigurasi tambahan..."
-cp -r ../config/* config/
+if [ -d ../config ] && [ "$(ls -A ../config)" ]; then
+  cp -r ../config/* config/
+else
+  echo "⚠️  Folder ../config tidak ditemukan atau kosong, melewati penyalinan konfigurasi."
+fi
 
 echo "🏗️ Mulai proses build ISO..."
 sudo lb build

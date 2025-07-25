@@ -18,7 +18,9 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           sudo apt-get clean
           sudo apt-get update -o Acquire::Retries=3
-          sudo apt-get install -y --no-install-recommends live-build debootstrap || (sudo apt-get -f install -y && sudo apt-get install -y --no-install-recommends live-build debootstrap)
+          sudo apt-get upgrade -y
+          sudo apt-get install -y --no-install-recommends live-build
+          sudo apt-get install -y --no-install-recommends debootstrap
           sudo apt-get check
           dpkg -l
 
