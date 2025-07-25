@@ -19,7 +19,7 @@ jobs:
         run: sudo bash bebzos-builder/build-bebzos.sh
 
       - name: Upload ISO
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bebzos-iso
           path: build/live-image-*.iso
