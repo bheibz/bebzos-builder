@@ -15,20 +15,36 @@ jobs:
       - name: Install dependencies
         run: |
           set -e
+          set -x
           export DEBIAN_FRONTEND=noninteractive
           sudo apt-get clean
           sudo apt-get update -o Acquire::Retries=3
           sudo apt-get upgrade -y
-          sudo apt-get install -y --no-install-recommends live-build
-          sudo apt-get install -y --no-install-recommends debootstrap
+          sudo apt-get install -y --no-install-recommends live-build || true
+          sudo apt-get install -y --no-install-recommends debootstrap || true
           sudo apt-get check
           dpkg -l
 
       - name: Run build script
         run: sudo bash build-bebzos.sh
 
-      - name: Upload ISO
+      - name: List files in build and build/live
+        run: |
+          echo "Files in build/:"
+          ls -lh build/
+          if [ -d build/live ]; then
+            echo "Files in build/live/:"
+            ls -lh build/live/
+          fi
+
+      - name: Upload ISO (root build dir)
         uses: actions/upload-artifact@v4
         with:
           name: bebzos-iso
           path: build/live-image-*.iso
+
+      - name: Upload ISO (build/live dir)
+        uses: actions/upload-artifact@v4
+        with:
+          name: bebzos-iso-alt
+          path: build/live/live-image-*.iso
