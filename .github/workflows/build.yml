@@ -15,8 +15,12 @@ jobs:
       - name: Install dependencies
         run: |
           set -e
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends live-build debootstrap
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get clean
+          sudo apt-get update -o Acquire::Retries=3
+          sudo apt-get install -y --no-install-recommends live-build debootstrap || (sudo apt-get -f install -y && sudo apt-get install -y --no-install-recommends live-build debootstrap)
+          sudo apt-get check
+          dpkg -l
 
       - name: Run build script
         run: sudo bash build-bebzos.sh
