@@ -1,0 +1,25 @@
+name: Build BebzOS ISO
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install -y live-build debootstrap
+
+      - name: Run build script
+        run: sudo bash bebzos-builder/build-bebzos.sh
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v3
+        with:
+          name: bebzos-iso
+          path: build/live-image-*.iso

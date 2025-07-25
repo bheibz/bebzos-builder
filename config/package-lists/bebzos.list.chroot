@@ -1,0 +1,22 @@
+# XFCE desktop & tools
+task-xfce-desktop
+xfce4-goodies
+lightdm
+
+# Shell & tools
+fish
+xpad
+gnome-terminal
+apt-fast
+
+# Browser
+chromium
+
+# AI Dummy Placeholder
+figlet
+
+# Utilities
+neofetch
+curl
+wget
+git

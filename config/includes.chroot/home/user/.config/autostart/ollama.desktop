@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=figlet BebzOS AI Ready
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Bebz AI Autostart
+Comment=Run dummy AI at startup
