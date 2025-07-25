@@ -16,7 +16,7 @@ jobs:
         run: sudo apt update && sudo apt install -y live-build debootstrap
 
       - name: Run build script
-        run: sudo bash bebzos-builder/build-bebzos.sh
+        run: sudo bash build-bebzos.sh
 
       - name: Upload ISO
         uses: actions/upload-artifact@v4
